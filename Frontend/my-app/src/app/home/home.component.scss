@@ -1,5 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .container {
-  height: 100vh;
+  width: 1247px;
+  height: 580px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -7,25 +15,63 @@
 mat-toolbar {
   display: flex;
   justify-content: space-between;
-  background-color: #2196f3;
+  align-items: center;
+  background-color: #2196F3;
+  height: 80px;
+  padding: 0 20px;
 }
 
 button {
   color: white;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .center-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #555;
 }
 
 h2 {
   margin: 0;
+  font-size: 24px;
 }
 
-.sidenav-container {
-  flex: 1;
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 16px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+.company-info-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.username-info {
+  height: 50px;
+  text-align: center;
+  font-style: italic;
+  color: white;
+  background-color: grey;
+}
+
+.images {
+  width: 100%;
 }

@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit{
 
         if (response.message === 'Successful Login') {
           this.snackBar.open('Login successful', 'OK', { ...snackBarConfig, panelClass: ['success-snackbar'] });
-          this.authService.isLoggedIn = true;
           this.router.navigate(['/home']);
+          localStorage.setItem('username', this.loginForm.value.username)
         } else if (response.message === 'Invalid password' || response.message === 'Invalid user') {
           this.snackBar.open('Invalid username or password', 'OK', { ...snackBarConfig, panelClass: ['error-snackbar'] });
         } else {

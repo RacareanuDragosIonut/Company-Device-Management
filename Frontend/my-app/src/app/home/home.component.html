@@ -1,24 +1,40 @@
 <div class="container">
   <mat-toolbar color="primary">
-    <button mat-icon-button>
-      <mat-icon>devices</mat-icon>
-      <span>Device Management</span>
+    <button mat-button routerLink="/usermngmnt">
+      <mat-icon>manage_accounts</mat-icon>
+      User Management
     </button>
-    <button mat-icon-button>
-      <mat-icon>people</mat-icon>
-      <span>User Management</span>
+    <button mat-button routerLink="/devicemngmnt">
+      <mat-icon>device_hub</mat-icon>
+      Device Management
     </button>
-    <button mat-icon-button>
+    <button mat-button routerLink="/deviceSets">
+      <mat-icon>devices_other</mat-icon>
+      Device Sets
+    </button>
+    <button mat-button routerLink="/user-info">
       <mat-icon>person</mat-icon>
-      <span>User Information</span>
+      User Info
     </button>
-    <button mat-icon-button>
-      <mat-icon>settings</mat-icon>
-      <span>Device Sets Page</span>
-    </button>
-
-    <div class="center-content">
-      <h2>Company Devices Management</h2>
-    </div>
   </mat-toolbar>
+
+  <div class="company-info">
+    <div class="company-info-content">
+      <h1>Company Devices Management</h1>
+      <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
   </div>
+
+  <div>
+    <h2 class="username-info">
+      Welcome, {{ username }}!
+    </h2>
+  </div>
+  <div class="images">
+    <img src="assets/images/devices.jpg" alt="Left Image" style="width: 600px; height: 400px; float: left; ">
+    <img src="assets/images/labdevices.jpg" alt="Right Image" style="width: 647px; height: 400px; float: right;">
+  </div>
+</div>

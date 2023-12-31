@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthServiceService {
   url: string;
-  public isLoggedIn: boolean = false;
   constructor(private http: HttpClient, private router: Router) {
     this.url = "http://127.0.0.1:5000"
   }
