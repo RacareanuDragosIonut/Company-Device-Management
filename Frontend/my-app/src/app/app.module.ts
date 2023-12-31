@@ -16,14 +16,23 @@ import { AuthGuardService } from './auth-guard.service';
 import {MatButtonModule} from '@angular/material/button';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule } from '@angular/material/icon'
+import { HomeComponent } from './home/home.component';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
+    AppComponent,
     LoginComponent,
     DevicesetComponent,
     DevicemngmntComponent,
     UsermngmntComponent,
     UserinfoComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatButtonModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
     RouterModule
@@ -42,5 +57,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthServiceService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

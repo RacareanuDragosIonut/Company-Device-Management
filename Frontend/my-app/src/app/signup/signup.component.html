@@ -1,30 +1,57 @@
-<div class="signup-container">
+<body class="signup-container">
   <h1>Welcome to Company Devices Management!</h1>
-  <h2>Signup</h2>
+  <h2>Sign Up</h2>
 
-  <form [formGroup]="signupForm">
-    <div class="form-group">
+  <form [formGroup]="signupForm" class="form">
+    <div class="form-group left-column">
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input matInput placeholder="Username" formControlName="username" required>
         <mat-error>Provide a username</mat-error>
       </mat-form-field>
-    </div>
 
-    <div class="form-group">
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput placeholder="Password" formControlName="password" type="password" required>
-        <mat-error>Provide a password</mat-error>
+        <mat-error>{{ signupForm.get('password')?.hasError('required') ? 'Provide a password' : 'Password must have at least 6 characters' }}</mat-error>
       </mat-form-field>
     </div>
+
+    <div class="form-group right-column">
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role" #matSelect required>
+            {{role}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Select a role</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <mat-select formControlName="location">
+          <mat-option *ngFor="let location of locations" [value]="location" #matSelect required>
+            {{location}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Select a location</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Group</mat-label>
+        <mat-select formControlName="group">
+          <mat-option *ngFor="let group of groups" [value]="group" #matSelect required>
+            {{group}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Select a group</mat-error>
+      </mat-form-field>
+    </div>
+    </form>
     <p class="link">
       Already Have an account?
       <a routerLink="/login">Press Here to login</a>
     </p>
     <button mat-raised-button color="primary" (click)="signup()">Signup</button>
-
-
-  </form>
-</div>
-
+</body>

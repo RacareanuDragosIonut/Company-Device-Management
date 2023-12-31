@@ -34,4 +34,15 @@ $my-app-theme: mat.define-light-theme((
 @include mat.all-component-themes($my-app-theme);
 
 
+.success-snackbar {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: #fff;
+}
+
+
 

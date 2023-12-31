@@ -12,6 +12,7 @@ app.config['MONGODB_SETTINGS'] = {
 }
 app.config['DEBUG'] = True
 initialize_db(app)
+
 CORS(app)
 from .routes.users import app
 from .routes.devices import app
