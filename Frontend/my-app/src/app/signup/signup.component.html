@@ -53,5 +53,5 @@
       Already Have an account?
       <a routerLink="/login">Press Here to login</a>
     </p>
-    <button mat-raised-button color="primary" (click)="signup()">Signup</button>
+    <button mat-raised-button color="primary" [disabled]="!signupForm.valid" (click)="signup()">Signup</button>
 </body>

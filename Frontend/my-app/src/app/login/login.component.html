@@ -26,6 +26,6 @@
       Do you not have an account?
       <a routerLink="/signup">Press Here to signup</a>
     </p>
-    <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login()">Login</button>
 </div>
 

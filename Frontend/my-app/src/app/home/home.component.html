@@ -1,6 +1,6 @@
 <div class="container">
-  <mat-toolbar color="primary">
-    <button mat-button routerLink="/usermngmnt">
+  <mat-toolbar>
+    <button *ngIf="role!=='user'"mat-button routerLink="/usermngmnt">
       <mat-icon>manage_accounts</mat-icon>
       User Management
     </button>

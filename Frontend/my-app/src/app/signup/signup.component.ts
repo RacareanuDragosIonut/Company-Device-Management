@@ -11,15 +11,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SignupComponent {
   signupForm!: FormGroup;
-  roles: string[] = ["masteradmin", "locationadmin", "admin", "user"]
-  locations: string[]= ["Bucharest", "Paris", "Berlin", "London", "Rome", "Budapest"]
-  groups: string[] = ["Development","Network", "Human Resources", "Sales", "Management"]
+  roles: string[] = []
+  locations: string[]= []
+  groups: string[] = []
      constructor(
       public router: Router, public authService: AuthServiceService,private snackBar: MatSnackBar
      ){
 
      }
      ngOnInit(): void {
+      this.roles = this.authService.roles;
+      this.locations = this.authService.locations;
+      this.groups = this.authService.groups;
       this.initForm();
      }
 

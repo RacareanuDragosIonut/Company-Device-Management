@@ -23,6 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule } from '@angular/material/icon'
 import { HomeComponent } from './home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AddUserComponent } from './usermngmnt/add-user/addUser.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     UsermngmntComponent,
     UserinfoComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     RouterModule

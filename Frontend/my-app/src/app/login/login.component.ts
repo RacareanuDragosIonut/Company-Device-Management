@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit{
 
      }
      ngOnInit(): void {
+      localStorage.removeItem('username');
+      localStorage.removeItem('role');
+      localStorage.removeItem('location');
+      localStorage.removeItem('group');
       this.initForm();
      }
 
@@ -38,9 +42,13 @@ export class LoginComponent implements OnInit{
         };
 
         if (response.message === 'Successful Login') {
+          let user = response.user;
           this.snackBar.open('Login successful', 'OK', { ...snackBarConfig, panelClass: ['success-snackbar'] });
           this.router.navigate(['/home']);
-          localStorage.setItem('username', this.loginForm.value.username)
+          localStorage.setItem('username', user.username);
+          localStorage.setItem('location', user.location);
+          localStorage.setItem('group', user.group);
+          localStorage.setItem('role', user.role);
         } else if (response.message === 'Invalid password' || response.message === 'Invalid user') {
           this.snackBar.open('Invalid username or password', 'OK', { ...snackBarConfig, panelClass: ['error-snackbar'] });
         } else {

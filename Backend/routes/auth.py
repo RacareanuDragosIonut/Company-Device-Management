@@ -5,7 +5,7 @@ from Backend import app
 from mongoengine.queryset.visitor import Q
 import uuid
 from Backend.database.models import User
-
+session = {}
 def login_required(view_func):
     def wrapper(*args, **kwargs):
         if 'user_id' in session:
@@ -25,7 +25,8 @@ def login():
     if user:
         if user.password == password:
             session['user_id'] = user.userId
-            return jsonify({'message': 'Successful Login'})
+            print("user_id is" + session.get('user_id'))
+            return jsonify({'message': 'Successful Login', 'user': user})
         else:
             return jsonify({'message': 'Invalid password'})
     else:
@@ -57,4 +58,9 @@ def signup():
 @login_required
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.pop('user_id', None)
+    try:
+        session.pop('user_id', None)
+        return jsonify({'message': "User successfully logged out"})
+    except Exception as e:
+        return jsonify({'message': "Exception" + e})
+

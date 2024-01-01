@@ -1,0 +1,51 @@
+
+
+<div mat-dialog-title>
+  <h2>Add User</h2>
+</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="addUserForm">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username" required>
+      <mat-error>Provide a username</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" type="password" required>
+      <mat-error>{{ addUserForm.get('password')?.hasError('required') ? 'Provide a password' : 'Password must have at least 6 characters' }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Location" formControlName="location">
+        <mat-option *ngFor="let location of locations" [value]="location" #matSelect required>
+          {{location}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a location</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Group" formControlName="group">
+        <mat-option *ngFor="let group of groups" [value]="group" #matSelect required>
+          {{group}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a group</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Role" formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role" #matSelect required>
+          {{role}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a role</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button style="margin-right:130px; margin-left: 130px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onAddClick()">Add</button>
+</div>
