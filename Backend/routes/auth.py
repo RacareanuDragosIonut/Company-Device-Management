@@ -25,7 +25,6 @@ def login():
     if user:
         if user.password == password:
             session['user_id'] = user.userId
-            print("user_id is" + session.get('user_id'))
             return jsonify({'message': 'Successful Login', 'user': user})
         else:
             return jsonify({'message': 'Invalid password'})

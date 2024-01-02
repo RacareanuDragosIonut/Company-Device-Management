@@ -53,5 +53,12 @@ export class AuthServiceService {
     return this.http.get(this.url + '/users');
   }
 
+  editUser(data: any){
+    return this.http.post(this.url + '/edit-user', data);
+  }
+
+  deleteUser(data: any){
+    return this.http.post(this.url + '/delete-user', data);
+  }
 
 }

@@ -26,6 +26,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddUserComponent } from './usermngmnt/add-user/addUser.component';
+import {MatMenuModule} from '@angular/material/menu'
+import { EditUserComponent } from './usermngmnt/edit-user/editUser.component';
+import { DeleteUserComponent } from './usermngmnt/delete-user/deleteUser.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,9 @@ import { AddUserComponent } from './usermngmnt/add-user/addUser.component';
     UserinfoComponent,
     SignupComponent,
     HomeComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,8 @@ import { AddUserComponent } from './usermngmnt/add-user/addUser.component';
     MatIconModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule
   ],
   exports: [
     RouterModule

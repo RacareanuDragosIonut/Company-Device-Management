@@ -3,12 +3,12 @@
   <mat-toolbar>
     <h2>User Management</h2>
     <span class="spacer"></span>
-    <button mat-button (click)="goToHomePage()">
+    <button class="standard-button" mat-button (click)="goToHomePage()">
       <mat-icon>home</mat-icon>Home
     </button>
-    <button mat-button (click)="addUser()">
+    <button class="standard-button" mat-button (click)="addUser()">
       <mat-icon>add</mat-icon>Add User</button>
-    <button mat-button (click)="filterTable()">
+    <button class="standard-button" mat-button (click)="filterTable()">
       <mat-icon>filter</mat-icon>Filter Table</button>
   </mat-toolbar>
 
@@ -33,8 +33,21 @@
       <td mat-cell *matCellDef="let user">{{ user.role }}</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'role']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'role']"></tr>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actionsMenu="matMenu">
+          <button mat-menu-item (click)="editUser(user)">Edit User</button>
+          <button mat-menu-item (click)="deleteUser(user)">Delete User</button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'role', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'role', 'actions']"></tr>
   </table>
   <mat-paginator [length]="users.length" [pageSize]="pageSize"
   [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons

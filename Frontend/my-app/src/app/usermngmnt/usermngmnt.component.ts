@@ -3,7 +3,8 @@ import { AuthServiceService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from './add-user/addUser.component';
-
+import { EditUserComponent } from './edit-user/editUser.component';
+import { DeleteUserComponent } from './delete-user/deleteUser.component';
 @Component({
   selector: 'app-usermngmnt',
   templateUrl: './usermngmnt.component.html',
@@ -57,5 +58,30 @@ export class UsermngmntComponent implements OnInit{
 
       goToHomePage(){
         this.router.navigate(['/home']);
+      }
+
+      editUser(user: any){
+        const dialogRef = this.dialog.open(
+          EditUserComponent,
+          { width: '600px', height: '600px',
+          data: {user: user} }
+        );
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
+      }
+
+      deleteUser(user: any){
+        const dialogRef = this.dialog.open(
+          DeleteUserComponent,
+          { width: '400px', height: '300px',
+          data: {user: user} }
+        );
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
+
       }
 }
