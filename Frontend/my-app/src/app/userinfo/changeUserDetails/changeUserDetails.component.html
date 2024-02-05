@@ -1,20 +1,16 @@
 
 
 <div mat-dialog-title>
-  <h2>Add User</h2>
+  <h2>Change User Details</h2>
 </div>
 
 <div mat-dialog-content>
-  <form [formGroup]="addUserForm">
+  <form [formGroup]="changeUserDetailsForm">
     <mat-form-field>
       <input matInput placeholder="Username" formControlName="username" required>
       <mat-error>Provide a username</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password" type="password" required>
-      <mat-error>{{ addUserForm.get('password')?.hasError('required') ? 'Provide a password' : 'Password must have at least 6 characters' }}</mat-error>
-    </mat-form-field>
 
     <mat-form-field>
       <mat-select placeholder="Location" formControlName="location">
@@ -47,5 +43,5 @@
 
 <div mat-dialog-actions>
   <button style="margin-right:130px; margin-left: 130px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onAddClick()" [disabled]="!addUserForm.valid">Add</button>
+  <button mat-raised-button color="primary" (click)="onUpdateClick()" [disabled]="!changeUserDetailsForm.valid">Update</button>
 </div>

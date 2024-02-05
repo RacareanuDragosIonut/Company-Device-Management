@@ -43,5 +43,5 @@
 
 <div mat-dialog-actions>
   <button style="margin-right:130px; margin-left: 130px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onUpdateClick()">Update</button>
+  <button mat-raised-button color="primary" (click)="onUpdateClick()" [disabled]="!editUserForm.valid">Update</button>
 </div>

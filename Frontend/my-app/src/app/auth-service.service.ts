@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class AuthServiceService {
   url: string;
   loggedInUser: any;
-  userRole: string;
-  userLocation: string;
-  userGroup: string;
+  userRole: string = "";
+  userLocation: string = "";
+  userGroup: string = "";
   roles: string[] = ["masteradmin", "locationadmin", "admin", "user"]
   locations: string[]= ["Bucharest", "Paris", "Berlin", "London", "Rome", "Budapest"]
   groups: string[] = ["Development","Network", "Human Resources", "Sales", "Management"]
@@ -20,6 +20,9 @@ export class AuthServiceService {
   acceptedGroups: string[]= [];
   constructor(private http: HttpClient, private router: Router) {
     this.url = "http://127.0.0.1:5000"
+   this.updatePermissions();
+}
+  updatePermissions(){
     this.userRole = localStorage.getItem('role')!;
     this.userLocation = localStorage.getItem('location')!;
     this.userGroup = localStorage.getItem('group')!;
@@ -38,7 +41,7 @@ export class AuthServiceService {
       this.acceptedLocations = [this.userLocation];
       this.acceptedGroups = [this.userGroup];
   }
-}
+  }
 
   login(data: any): Observable<any>{
     return this.http.post(this.url + '/login', data);
@@ -59,6 +62,10 @@ export class AuthServiceService {
 
   deleteUser(data: any){
     return this.http.post(this.url + '/delete-user', data);
+  }
+
+  changePassword(data: any){
+    return this.http.post(this.url + '/change-password', data);
   }
 
 }

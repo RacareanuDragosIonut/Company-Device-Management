@@ -12,6 +12,7 @@ import { DeleteUserComponent } from './delete-user/deleteUser.component';
 })
 export class UsermngmntComponent implements OnInit{
       users: any[] = [];
+      searchUsers: any[] = [];
       paginatedUsers: any[] = [];
       pageSize = 10;
       pageIndex = 0;
@@ -21,13 +22,20 @@ export class UsermngmntComponent implements OnInit{
       ngOnInit(): void {
         this.getData();
       }
+
       getData(){
         this.authService.getUsers().subscribe((response: any) => {
           this.users = response.users;
-          this.paginatedUsers = this.getPaginatedUsers();
+          this.searchUsers = response.users;
+          this.paginatedUsers = this.getPaginatedUsers(this.users);
         })
       }
 
+      applySearch(event: any): void {
+        let searchTerm: string = (event.target as HTMLInputElement).value;
+        this.searchUsers = this.users.filter( user => user.username.toLowerCase().includes(searchTerm));
+        this.paginatedUsers = this.getPaginatedUsers(this.searchUsers);
+      }
       addUser(){
         const dialogRef = this.dialog.open(
           AddUserComponent,
@@ -39,21 +47,17 @@ export class UsermngmntComponent implements OnInit{
         });
       }
 
-      filterTable(){
-
-      }
-
       onPaginatorChange(event: any){
         this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
 
-        this.paginatedUsers = this.getPaginatedUsers();
+        this.paginatedUsers = this.getPaginatedUsers(this.users);
       }
 
-      getPaginatedUsers(): any[] {
+      getPaginatedUsers(users: any[]): any[] {
         const startIndex = this.pageIndex * this.pageSize;
         const endIndex = startIndex + this.pageSize;
-        return this.users.slice(startIndex, endIndex);
+        return users.slice(startIndex, endIndex);
       }
 
       goToHomePage(){
@@ -75,7 +79,7 @@ export class UsermngmntComponent implements OnInit{
       deleteUser(user: any){
         const dialogRef = this.dialog.open(
           DeleteUserComponent,
-          { width: '400px', height: '300px',
+          { width: '400px', height: '250px',
           data: {user: user} }
         );
 

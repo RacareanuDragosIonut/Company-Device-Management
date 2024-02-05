@@ -29,6 +29,8 @@ import { AddUserComponent } from './usermngmnt/add-user/addUser.component';
 import {MatMenuModule} from '@angular/material/menu'
 import { EditUserComponent } from './usermngmnt/edit-user/editUser.component';
 import { DeleteUserComponent } from './usermngmnt/delete-user/deleteUser.component';
+import { ChangeUserDetailsComponent } from './userinfo/changeUserDetails/changeUserDetails.component';
+import { ChangePasswordComponent } from './userinfo/changePassword/changePassword.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,9 @@ import { DeleteUserComponent } from './usermngmnt/delete-user/deleteUser.compone
     HomeComponent,
     AddUserComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ChangeUserDetailsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

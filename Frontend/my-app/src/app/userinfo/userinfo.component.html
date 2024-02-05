@@ -1,1 +1,22 @@
-<p>userinfo works!</p>
+<body>
+  <div class="page-container">
+    <button class="home-button" mat-button (click)="goToHomePage()">
+      <mat-icon>home</mat-icon>Home
+    </button>
+
+    <div class="user-details-container">
+      <h2>User Details</h2>
+      <div class="user-details">
+        <div class="user-label">Logged in Username: {{ username }}</div>
+        <div class="user-label">User Role: {{ role }}</div>
+        <div class="user-label">User Location: {{ location }}</div>
+        <div class="user-label">User Group: {{ group }}</div>
+      </div>
+
+      <div class="button-container">
+        <button class="standard-button" mat-button (click)="openChangePasswordDialog()">Change Password</button>
+        <button class="standard-button" mat-button (click)="openChangeUserDetailsDialog()">Change User Details</button>
+      </div>
+    </div>
+  </div>
+</body>
