@@ -32,6 +32,7 @@ import { DeleteUserComponent } from './usermngmnt/delete-user/deleteUser.compone
 import { ChangeUserDetailsComponent } from './userinfo/changeUserDetails/changeUserDetails.component';
 import { ChangePasswordComponent } from './userinfo/changePassword/changePassword.component';
 import { AddDeviceComponent } from './devicemngmnt/addDevice/addDevice.component';
+import { DeleteDeviceComponent } from './devicemngmnt/deleteDevice/deleteDevice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { AddDeviceComponent } from './devicemngmnt/addDevice/addDevice.component
     ChangeUserDetailsComponent,
     ChangePasswordComponent,
     DeviceMngmntComponent,
-    AddDeviceComponent
+    AddDeviceComponent,
+    DeleteDeviceComponent
   ],
   imports: [
     BrowserModule,

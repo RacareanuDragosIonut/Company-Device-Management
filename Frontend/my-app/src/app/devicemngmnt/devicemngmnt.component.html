@@ -58,8 +58,8 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #actionsMenu="matMenu">
-          <button mat-menu-item (click)="editDevice(device)">Edit User</button>
-          <button mat-menu-item (click)="deleteDevice(device)">Delete User</button>
+          <button mat-menu-item (click)="editDevice(device)">Edit Device</button>
+          <button mat-menu-item (click)="deleteDevice(device)">Delete Device</button>
           <button *ngIf="userRole!='user'" mat-menu-item (click)="share(device)">Share With User</button>
           <button *ngIf="userRole!='user'" mat-menu-item (click)="unshare(device)">Unshare</button>
           <button *ngIf="userRole!='user'" mat-menu-item (click)="changeOwner(device)">Change Owner</button>

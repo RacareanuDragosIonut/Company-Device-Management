@@ -3,6 +3,7 @@ import { AuthServiceService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDeviceComponent } from './addDevice/addDevice.component';
+import { DeleteDeviceComponent } from './deleteDevice/deleteDevice.component';
 // import { AddUserComponent } from './add-user/addUser.component';
 // import { EditUserComponent } from './edit-user/editUser.component';
 // import { DeleteUserComponent } from './delete-user/deleteUser.component';
@@ -84,15 +85,15 @@ export class DeviceMngmntComponent implements OnInit{
       }
 
       deleteDevice(device: any){
-        // const dialogRef = this.dialog.open(
-        //   DeleteUserComponent,
-        //   { width: '400px', height: '250px',
-        //   data: {user: user} }
-        // );
+        const dialogRef = this.dialog.open(
+          DeleteDeviceComponent,
+          { width: '400px', height: '250px',
+          data: {device: device} }
+        );
 
-        // dialogRef.afterClosed().subscribe(() => {
-        //   this.getData();
-        // });
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
 
       }
 

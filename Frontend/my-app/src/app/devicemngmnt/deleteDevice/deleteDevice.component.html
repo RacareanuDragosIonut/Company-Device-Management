@@ -1,0 +1,9 @@
+
+<h2 mat-dialog-title>Delete User</h2>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete the device "{{ device.name }}"?</p>
+</div>
+<div class="mat-dialog-actions" mat-dialog-actions>
+  <button style="margin-right:70px; margin-left: 70px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button color="primary" mat-raised-button (click)="onDeleteClick()">Delete</button>
+</div>
