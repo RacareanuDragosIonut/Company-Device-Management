@@ -4,14 +4,14 @@ from mongoengine import *
 from enum import unique
 from .db import db 
 
-class DeviceSet(db.Document):
-    deviceSetId = db.StringField(Required=True, unique=True)
-    owner = db.StringField(Required=True)
-    location = db.StringField(Required=True)
-    group = db.StringField(Required=True)
-    name = db.StringField(Required=True)
-    deviceListId = db.ListField(Required=True)
-    sharedUsersId = db.ListField()
+# class DeviceSet(db.Document):
+#     deviceSetId = db.StringField(Required=True, unique=True)
+#     owner = db.StringField(Required=True)
+#     location = db.StringField(Required=True)
+#     group = db.StringField(Required=True)
+#     name = db.StringField(Required=True)
+#     deviceListId = db.ListField(Required=True)
+#     sharedUsersId = db.ListField()
 
 class Device(db.Document):
     deviceId = db.StringField(Required=True, unique=True)
@@ -22,7 +22,7 @@ class Device(db.Document):
     type = db.StringField(Required=True)
     model = db.StringField(Required=True)
     ip = db.StringField(Required=True)
-    deviceSetId = db.StringField()
+    # deviceSetId = db.StringField()
     sharedUsersId = db.ListField()
 
 class User(db.Document):

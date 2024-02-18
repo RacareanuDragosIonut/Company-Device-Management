@@ -1,0 +1,56 @@
+
+
+<div mat-dialog-title>
+  <h2>Add Device</h2>
+</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="addDeviceForm">
+    <mat-form-field>
+      <input matInput placeholder="Device name" formControlName="name" required>
+      <mat-error>Provide a device name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Location" formControlName="location">
+        <mat-option *ngFor="let location of locations" [value]="location" #matSelect required>
+          {{location}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a location</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Group" formControlName="group">
+        <mat-option *ngFor="let group of groups" [value]="group" #matSelect required>
+          {{group}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a group</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Type" formControlName="type">
+        <mat-option *ngFor="let type of deviceTypes" [value]="type" #matSelect required>
+          {{type}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Select a device type</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Model" formControlName="model" required>
+      <mat-error>Provide a model</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="IP" formControlName="ip" required>
+      <mat-error>Provide an IP</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button style="margin-right:130px; margin-left: 130px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onAddClick()" [disabled]="!addDeviceForm.valid">Add</button>
+</div>

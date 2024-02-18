@@ -12,9 +12,11 @@ export class AuthServiceService {
   userRole: string = "";
   userLocation: string = "";
   userGroup: string = "";
+  userUsername: string = "";
   roles: string[] = ["masteradmin", "locationadmin", "admin", "user"]
   locations: string[]= ["Bucharest", "Paris", "Berlin", "London", "Rome", "Budapest"]
   groups: string[] = ["Development","Network", "Human Resources", "Sales", "Management"]
+  deviceTypes: string[] = ["Mobile Phone", "Laptop", "Headphones", "Laboratory Engineer Device"]
   acceptedRoles: string[] = [];
   acceptedLocations: string[] = [];
   acceptedGroups: string[]= [];
@@ -26,6 +28,7 @@ export class AuthServiceService {
     this.userRole = localStorage.getItem('role')!;
     this.userLocation = localStorage.getItem('location')!;
     this.userGroup = localStorage.getItem('group')!;
+    this.userUsername = localStorage.getItem('username')!;
     if(this.userRole == "masteradmin"){
       this.acceptedRoles = this.roles;
       this.acceptedLocations = this.locations;
@@ -67,5 +70,22 @@ export class AuthServiceService {
   changePassword(data: any){
     return this.http.post(this.url + '/change-password', data);
   }
+
+  getDevices(){
+    return this.http.get(this.url + '/devices');
+  }
+
+  editDevice(data: any){
+    return this.http.post(this.url + '/edit-device', data);
+  }
+
+  deleteDevice(data: any){
+    return this.http.post(this.url + '/delete-device', data);
+  }
+
+  addDevice(data: any){
+    return this.http.post(this.url + '/add-device', data);
+  }
+
 
 }

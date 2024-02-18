@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { AuthServiceService } from './auth-service.service';
 import { DevicesetComponent } from './deviceset/deviceset.component';
-import { DevicemngmntComponent } from './devicemngmnt/devicemngmnt.component';
+import { DeviceMngmntComponent } from './devicemngmnt/devicemngmnt.component';
 import { UsermngmntComponent } from './usermngmnt/usermngmnt.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,12 +31,12 @@ import { EditUserComponent } from './usermngmnt/edit-user/editUser.component';
 import { DeleteUserComponent } from './usermngmnt/delete-user/deleteUser.component';
 import { ChangeUserDetailsComponent } from './userinfo/changeUserDetails/changeUserDetails.component';
 import { ChangePasswordComponent } from './userinfo/changePassword/changePassword.component';
+import { AddDeviceComponent } from './devicemngmnt/addDevice/addDevice.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DevicesetComponent,
-    DevicemngmntComponent,
     UsermngmntComponent,
     UserinfoComponent,
     SignupComponent,
@@ -45,7 +45,9 @@ import { ChangePasswordComponent } from './userinfo/changePassword/changePasswor
     EditUserComponent,
     DeleteUserComponent,
     ChangeUserDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DeviceMngmntComponent,
+    AddDeviceComponent
   ],
   imports: [
     BrowserModule,

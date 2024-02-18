@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { DevicemngmntComponent } from './devicemngmnt/devicemngmnt.component';
+import { DeviceMngmntComponent } from './devicemngmnt/devicemngmnt.component';
 import { DevicesetComponent } from './deviceset/deviceset.component';
 import { UsermngmntComponent } from './usermngmnt/usermngmnt.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
@@ -33,7 +33,7 @@ export const routes: Routes = [
 },
 {
   path: 'devicemngmnt',
-  component: DevicemngmntComponent,
+  component: DeviceMngmntComponent,
   canActivate: [AuthGuardService]
 
 },
