@@ -29,6 +29,7 @@ def get_devices():
 @app.route('/edit-device', methods=['POST'])
 def edit_device():
     device_data = request.get_json()
+    print(device_data)
     device_id = device_data.get('deviceId')
     user_id = session.get('user_id')
     user = User.objects(userId = user_id).first()
@@ -36,16 +37,23 @@ def edit_device():
     user_group = user.group
     user_role = user.role
     error_message = ""
-    owner_user = User.objects(username = device_data.get('owner')).first()
-    if owner_user is None:
-        error_message += "This username is not valid, please write a correct username"
-    else:
-        if user_role == "locationadmin":
-            if owner_user.location != user_location:
-                error_message += "You can only change the owner to a user from your own location."
-        if user_role == "admin":
-             if owner_user.location != user_location or owner_user.group != user_group:
-                error_message += "You can only change the owner to a user from your own location and group."
+    original_device = Device.objects(deviceId = device_id).first()
+    if original_device is None:
+        return {'message': "Device not found!"}
+    original_owner = original_device.owner
+    modified_owner = device_data.get('owner')
+    if modified_owner != original_owner:
+        owner_user = User.objects(username = device_data.get('owner')).first()
+        if owner_user is None:
+            error_message += "This username is not valid, please write a correct username"
+        else:
+            if user_role == "locationadmin":
+                if owner_user.location != user_location:
+                    error_message += "You can only change the owner to a user from your own location."
+            if user_role == "admin":
+                if owner_user.location != user_location or owner_user.group != user_group:
+                    error_message += "You can only change the owner to a user from your own location and group."
+    
     update_fields = {
         'owner': device_data.get('owner'),
         'location': device_data.get('location'),
