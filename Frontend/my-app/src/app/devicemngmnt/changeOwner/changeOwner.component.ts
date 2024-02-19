@@ -5,27 +5,35 @@ import { AuthServiceService } from '../../auth-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-delete-device',
-  templateUrl: './deleteDevice.component.html',
-  styleUrls: ['./deleteDevice.component.scss']
+  selector: 'app-change-owner',
+  templateUrl: './changeOwner.component.html',
+  styleUrls: ['./changeOwner.component.scss']
 })
-export class DeleteDeviceComponent implements OnInit {
+export class ChangeOwnerComponent implements OnInit {
+  changeOwnerForm!: FormGroup;
+  owner: string = "";
   device: any;
   constructor(
-    public dialogRef: MatDialogRef<DeleteDeviceComponent>,
+    public dialogRef: MatDialogRef<ChangeOwnerComponent>,
     public authService: AuthServiceService, public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-
       this.device = data.device;
   }
 
   ngOnInit(): void {
-
+    this.initForm();
   }
 
-  onDeleteClick(){
-    this.authService.deleteDevice({'deviceId': this.device.deviceId}).subscribe((response: any)=>{
+  initForm(){
+    this.changeOwnerForm = new FormGroup({
+      owner: new FormControl(this.device.owner, [Validators.required])
+    })
+  }
+  onChangeOwnerClick(): void {
+    const { owner, ...newDevice } = this.device;
+
+    this.authService.editDevice({...newDevice, owner: this.changeOwnerForm.value.owner}).subscribe((response: any) =>{
       if (response && response.message) {
         const snackBarConfig = {
           duration: 3000,
@@ -35,7 +43,6 @@ export class DeleteDeviceComponent implements OnInit {
         if(response.message.includes('successfully')){
           this.dialogRef.close();
         }
-
       }
     },
     (error) => {
@@ -43,7 +50,7 @@ export class DeleteDeviceComponent implements OnInit {
       const snackBarConfig = { duration: 5000, panelClass: ['error-snackbar'] };
       this.snackBar.open(errorMessage, 'OK', snackBarConfig);
     })
-  }
+    }
 
 
   onCancelClick(): void {

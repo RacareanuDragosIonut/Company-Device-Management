@@ -58,7 +58,10 @@ export class EditDeviceComponent implements OnInit {
           panelClass: response.message.includes('successfully') ? ['success-snackbar'] : ['error-snackbar'],
         };
         this.snackBar.open(response.message, 'OK', snackBarConfig);
-        this.dialogRef.close();
+        if(response.message.includes('successfully')){
+          this.dialogRef.close();
+        }
+
       }
     },
     (error) => {

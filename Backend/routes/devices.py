@@ -53,24 +53,26 @@ def edit_device():
             if user_role == "admin":
                 if owner_user.location != user_location or owner_user.group != user_group:
                     error_message += "You can only change the owner to a user from your own location and group."
-    
-    update_fields = {
-        'owner': device_data.get('owner'),
-        'location': device_data.get('location'),
-        'group': device_data.get('group'),
-        'name': device_data.get('name'),
-        'type': device_data.get('type'),
-        'model': device_data.get('model'),
-        'ip': device_data.get('ip'),
-        'sharedUsersId': device_data.get('sharedUsersId')
-    }
+    if(error_message == ""):
+        update_fields = {
+            'owner': device_data.get('owner'),
+            'location': device_data.get('location'),
+            'group': device_data.get('group'),
+            'name': device_data.get('name'),
+            'type': device_data.get('type'),
+            'model': device_data.get('model'),
+            'ip': device_data.get('ip'),
+            'sharedUsersId': device_data.get('sharedUsersId')
+        }
 
-    result = Device.objects(deviceId=device_id).update(**update_fields)
+        result = Device.objects(deviceId=device_id).update(**update_fields)
 
-    if result:
-        return jsonify({'message': 'Device updated successfully'})
+        if result:
+            return jsonify({'message': 'Device updated successfully'})
+        else:
+            return jsonify({'message': 'Device not found or no changes made'})
     else:
-        return jsonify({'message': 'Device not found or no changes made'})
+        return jsonify({'message': error_message})
     
 
 @login_required

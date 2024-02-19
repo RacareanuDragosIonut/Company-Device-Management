@@ -1,0 +1,24 @@
+
+
+<div mat-dialog-title>
+  <h2>Change Owner</h2>
+</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="changeOwnerForm">
+    <span>Write the owner's username</span>
+    <mat-form-field>
+      <input matInput placeholder="Owner" formControlName="owner" required>
+      <mat-error>Provide an owner</mat-error>
+    </mat-form-field>
+
+
+
+
+  </form>
+</div>
+
+<div mat-dialog-actions style="display: flex; justify-content: space-between;">
+  <button style="margin-left: 30px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button style="margin-right: 30px;" mat-raised-button color="primary" (click)="onChangeOwnerClick()" [disabled]="!changeOwnerForm.valid">Change Owner</button>
+</div>

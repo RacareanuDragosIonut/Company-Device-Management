@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddDeviceComponent } from './addDevice/addDevice.component';
 import { DeleteDeviceComponent } from './deleteDevice/deleteDevice.component';
 import { EditDeviceComponent } from './editDevice/editDevice.component';
+import { ChangeOwnerComponent } from './changeOwner/changeOwner.component';
 // import { AddUserComponent } from './add-user/addUser.component';
 // import { EditUserComponent } from './edit-user/editUser.component';
 // import { DeleteUserComponent } from './delete-user/deleteUser.component';
@@ -110,7 +111,15 @@ export class DeviceMngmntComponent implements OnInit{
       }
 
       changeOwner(device: any){
+        const dialogRef = this.dialog.open(
+          ChangeOwnerComponent,
+          { width: '400px', height: '400px',
+          data: {device: device} }
+        );
 
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
       }
 
 
