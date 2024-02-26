@@ -14,15 +14,16 @@ def get_devices():
         user_role = user.role
         user_location = user.location
         user_group = user.group
+        user_id = user.userId
         user_username = user.username
         if user_role == "masteradmin":
             devices_returned = Device.objects()
         if user_role == "locationadmin":
-            devices_returned = Device.objects(Q(location=user_location) | Q(sharedUsersId__in=user_username))
+            devices_returned = Device.objects.filter(Q(location=user_location) | Q(sharedUsersId__contains=user_id))
         if user_role == "admin":
-            devices_returned = Device.objects(Q(location=user_location)& Q(group=user_group) | Q(sharedUsersId__in=user_username))
+            devices_returned = Device.objects.filter((Q(location=user_location)& Q(group=user_group)) | Q(sharedUsersId__contains=user_id))
         if user_role == "user":
-            devices_returned = Device.objects(Q(owner=user_username) | Q(sharedUsersId__in=user_username))
+            devices_returned = Device.objects.filter(Q(owner=user_username) | Q(sharedUsersId__contains=user_id))
     return jsonify({"devices": devices_returned})
 
 @login_required
@@ -150,6 +151,9 @@ def share_to_user():
     shared_user_id = shared_user.userId
     device = Device.objects(Q(deviceId=shared_device_id)).first()
     if device:
+        already_shared_users = device.sharedUsersId
+        if shared_user_id in already_shared_users:
+            return jsonify({'message': 'Device already shared with the user'})
         result = device.update(push__sharedUsersId=shared_user_id)
         if result:
             return jsonify({'message': 'Device shared successfully'})

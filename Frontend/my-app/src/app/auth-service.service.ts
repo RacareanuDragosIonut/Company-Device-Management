@@ -87,5 +87,8 @@ export class AuthServiceService {
     return this.http.post(this.url + '/add-device', data);
   }
 
+  shareDevice(data: any){
+    return this.http.post(this.url + '/share-to-user', data);
+  }
 
 }
