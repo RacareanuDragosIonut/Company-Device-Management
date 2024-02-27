@@ -91,4 +91,11 @@ export class AuthServiceService {
     return this.http.post(this.url + '/share-to-user', data);
   }
 
+  unshareDevice(data: any){
+    return this.http.post(this.url + '/unshare-from-users', data);
+  }
+
+  getUsernameById(id: any){
+    return this.http.get(this.url + '/get-username/' + id);
+  }
 }

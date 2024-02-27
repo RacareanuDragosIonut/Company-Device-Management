@@ -36,6 +36,8 @@ import { DeleteDeviceComponent } from './devicemngmnt/deleteDevice/deleteDevice.
 import { EditDeviceComponent } from './devicemngmnt/editDevice/editDevice.component';
 import { ChangeOwnerComponent } from './devicemngmnt/changeOwner/changeOwner.component';
 import { ShareDeviceComponent } from './devicemngmnt/shareDevice/shareDevice.component';
+import { UnshareDeviceComponent } from './devicemngmnt/unshareDevice/unshareDevice.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,8 @@ import { ShareDeviceComponent } from './devicemngmnt/shareDevice/shareDevice.com
     DeleteDeviceComponent,
     EditDeviceComponent,
     ChangeOwnerComponent,
-    ShareDeviceComponent
+    ShareDeviceComponent,
+    UnshareDeviceComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { ShareDeviceComponent } from './devicemngmnt/shareDevice/shareDevice.com
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   exports: [
     RouterModule

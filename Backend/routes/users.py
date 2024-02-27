@@ -87,5 +87,19 @@ def delete_user():
         return jsonify({'message': 'User deleted successfully'})
     else:
         return jsonify({'message': 'User not found'})
+    
+@login_required
+@app.route('/get-username/<id>', methods=['GET'])
+def get_username(id):
+    if id is None:
+        return jsonify({'message': 'User ID is required'})
+
+    user = User.objects(userId=id).first()
+    if user:
+        username = user.username
+        return jsonify({'message': 'Username retrived successfully', 'username': username})
+    else:
+        return jsonify({'message': 'User not found'})
+
         
     

@@ -7,6 +7,7 @@ import { DeleteDeviceComponent } from './deleteDevice/deleteDevice.component';
 import { EditDeviceComponent } from './editDevice/editDevice.component';
 import { ChangeOwnerComponent } from './changeOwner/changeOwner.component';
 import { ShareDeviceComponent } from './shareDevice/shareDevice.component';
+import { UnshareDeviceComponent } from './unshareDevice/unshareDevice.component';
 // import { AddUserComponent } from './add-user/addUser.component';
 // import { EditUserComponent } from './edit-user/editUser.component';
 // import { DeleteUserComponent } from './delete-user/deleteUser.component';
@@ -115,7 +116,15 @@ export class DeviceMngmntComponent implements OnInit{
       }
 
       unshare(device: any){
+        const dialogRef = this.dialog.open(
+          UnshareDeviceComponent,
+          { width: '400px', height: '400px',
+          data: {device: device} }
+        );
 
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
 
       }
 

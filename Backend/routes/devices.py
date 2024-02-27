@@ -164,34 +164,20 @@ def share_to_user():
     
 
 @login_required
-@app.route('/unshare-from-user', methods=['POST'])
-def unshare_from_user():
-    user_id = session.get('user_id')
-    user = User.objects(userId = user_id).first()
-    user_role = user.role
-    user_location = user.location
-    user_group = user.group
+@app.route('/unshare-from-users', methods=['POST'])
+def unshare_from_users():
     data = request.get_json()
-    shared_user_username = data.get('username')
+    shared_user_ids = data.get('user_ids')
     shared_device_id = data.get('device_id')
-    
-    unshared_user = User.objects(Q(username=shared_user_username)).first()
-    if user is None:
-        return {'message': 'This username is not valid, please write a correct username'}
-    if user_role == "locationadmin":
-            if unshared_user.location != user_location:
-                return {'message': "You can only unshare the device from a user from your own location."}
-    if user_role == "admin":
-            if unshared_user.location != user_location or unshared_user.group != user_group:
-                return {'message': "You can only unshare the device from a user from your own location and group."}
-    unshared_user_id = unshared_user.userId
+    print(shared_user_ids)
+    print(shared_device_id)
     device = Device.objects(Q(deviceId=shared_device_id)).first()
     if device:
-        result = device.update(pull__sharedUsersId=unshared_user_id)
-        if result:
-            return jsonify({'message': 'Device unshared successfully'})
-        else:
-            return jsonify({'message': 'Error when unsharing the device'})
+        for shared_user_id in shared_user_ids:
+            result = device.update(pull__sharedUsersId=shared_user_id)
+            if not result:
+                return jsonify({'message': 'Error when unsharing the device from the user' + shared_user_id})
+        return jsonify({'message': 'Device successfully unshared from users'})
     else:
         return {'message': "Device not found"}
 
