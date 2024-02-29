@@ -9,9 +9,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './filterDevices.component.html',
   styleUrls: ['./filterDevices.component.scss']
 })
-export class FilterDevicesComponent {
+export class FilterDevicesComponent implements OnInit{
   deviceTypesList: string[] = [];
   selectedDeviceTypes: string[] = [];
+
   constructor(
     public dialogRef: MatDialogRef<FilterDevicesComponent>,
     public authService: AuthServiceService, public snackBar: MatSnackBar,
@@ -20,7 +21,15 @@ export class FilterDevicesComponent {
     this.deviceTypesList = this.authService.deviceTypes;
   }
 
+ ngOnInit(): void {
+   if(localStorage.getItem('deviceTypes')){
+    this.selectedDeviceTypes = localStorage.getItem('deviceTypes')?.split(",")!
+   }
+ }
 
+ isSelected(type: string): boolean {
+  return this.selectedDeviceTypes.includes(type);
+}
 
   onCancelClick(): void {
     this.dialogRef.close();
@@ -37,6 +46,7 @@ export class FilterDevicesComponent {
 
 
   onFilterClick(){
-
+      localStorage.setItem('deviceTypes', this.selectedDeviceTypes.toString())
+      this.dialogRef.close()
   }
 }

@@ -26,10 +26,13 @@ export class DeviceMngmntComponent implements OnInit{
       userRole: string = "";
       userLocation: string ="";
       userGroup: string = "";
+      deviceTypeFilters: string[] = []
       constructor(public authService: AuthServiceService, public router: Router, public dialog: MatDialog){
 
       }
       ngOnInit(): void {
+
+        this.deviceTypeFilters = localStorage.getItem('deviceTypes')?.split(',')!
         this.getData();
         this.userRole = this.authService.userRole;
         this.userLocation = this.authService.userLocation;
@@ -39,7 +42,8 @@ export class DeviceMngmntComponent implements OnInit{
       getData(){
         this.authService.getDevices().subscribe((response: any) => {
           this.devices = response.devices;
-          this.searchDevices = response.devices;
+          this.devices = this.devices.filter( device => this.deviceTypeFilters.includes(device.type));
+          this.searchDevices = this.devices;
           this.paginatedDevices = this.getPaginatedDevices(this.devices);
         })
       }
@@ -150,7 +154,8 @@ export class DeviceMngmntComponent implements OnInit{
         );
 
         dialogRef.afterClosed().subscribe(() => {
-          this.getData();
+          this.deviceTypeFilters = localStorage.getItem('deviceTypes')?.split(',')!
+          this.getData()
         });
       }
 }

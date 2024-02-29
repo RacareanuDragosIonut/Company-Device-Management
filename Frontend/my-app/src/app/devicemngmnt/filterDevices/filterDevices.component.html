@@ -8,7 +8,7 @@
 
     <span>Select the type of devices that you want to be shown in the page:</span>
       <br>
-      <mat-checkbox (change)="onSelectCheckbox(type, $event.checked)" *ngFor="let type of deviceTypesList" [value]="type">{{ type }}</mat-checkbox>
+      <mat-checkbox (change)="onSelectCheckbox(type, $event.checked)" *ngFor="let type of deviceTypesList" [value]="type" [checked]="isSelected(type)">{{ type }}</mat-checkbox>
 </div>
 
 <div mat-dialog-actions style="display: flex; justify-content: space-between;">
