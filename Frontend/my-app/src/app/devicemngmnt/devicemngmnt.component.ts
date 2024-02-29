@@ -8,6 +8,7 @@ import { EditDeviceComponent } from './editDevice/editDevice.component';
 import { ChangeOwnerComponent } from './changeOwner/changeOwner.component';
 import { ShareDeviceComponent } from './shareDevice/shareDevice.component';
 import { UnshareDeviceComponent } from './unshareDevice/unshareDevice.component';
+import { FilterDevicesComponent } from './filterDevices/filterDevices.component';
 // import { AddUserComponent } from './add-user/addUser.component';
 // import { EditUserComponent } from './edit-user/editUser.component';
 // import { DeleteUserComponent } from './delete-user/deleteUser.component';
@@ -142,6 +143,14 @@ export class DeviceMngmntComponent implements OnInit{
 
 
       filterByDeviceType(){
+        const dialogRef = this.dialog.open(
+          FilterDevicesComponent,
+          { width: '400px', height: '400px',
+          }
+        );
 
+        dialogRef.afterClosed().subscribe(() => {
+          this.getData();
+        });
       }
 }

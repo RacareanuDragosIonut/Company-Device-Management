@@ -1,0 +1,17 @@
+
+
+<div mat-dialog-title>
+  <h2>Filter Devices By Their Type</h2>
+</div>
+
+<div mat-dialog-content>
+
+    <span>Select the type of devices that you want to be shown in the page:</span>
+      <br>
+      <mat-checkbox (change)="onSelectCheckbox(type, $event.checked)" *ngFor="let type of deviceTypesList" [value]="type">{{ type }}</mat-checkbox>
+</div>
+
+<div mat-dialog-actions style="display: flex; justify-content: space-between;">
+  <button style="margin-left: 30px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button style="margin-right: 30px;" mat-raised-button color="primary" (click)="onFilterClick()" [disabled]="selectedDeviceTypes.length == 0">Filter Table</button>
+</div>
