@@ -51,6 +51,15 @@
       <td mat-cell *matCellDef="let device">{{ device.ip }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="locationCheck">
+      <th mat-header-cell *matHeaderCellDef>Location Check</th>
+      <td mat-cell *matCellDef="let device">
+        <button mat-button class="standard-button" (click)="openLocationCheck(device.ip)">
+       Location Check
+      </button>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let device">
@@ -67,8 +76,8 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'owner', 'type', 'model', 'ip','actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'owner', 'type', 'model', 'ip','actions']"></tr>
+    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'owner', 'type', 'model', 'ip', 'locationCheck', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'owner', 'type', 'model', 'ip','locationCheck','actions']"></tr>
   </table>
   <mat-paginator [length]="searchDevices.length" [pageSize]="pageSize"
   [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons

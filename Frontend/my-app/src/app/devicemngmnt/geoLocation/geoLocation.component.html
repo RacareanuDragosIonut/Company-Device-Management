@@ -1,0 +1,41 @@
+
+
+<div mat-dialog-title>
+  <h2>Geographic Location of the Device</h2>
+</div>
+
+<div mat-dialog-content>
+
+    <h3>Location Details:</h3>
+    <div>
+      <p *ngIf="locationDetails == undefined && isRetrieved == true">The location information could not be retrieved.</p>
+      <mat-spinner *ngIf="isRetrieved == false"></mat-spinner>
+      <div *ngIf="locationDetails != undefined">
+        <p>IP Address: {{locationDetails.ip_address}}</p>
+        <p>City: {{locationDetails.city}}</p>
+        <p>City: {{locationDetails.region}}</p>
+        <p>Postal Code: {{locationDetails.postal_code}}</p>
+        <p>Country: {{locationDetails.country}}</p>
+        <p>Country Code: {{locationDetails.country_code}}</p>
+        <p>European Union: {{locationDetails.country_is_eu?'yes':'no'}}</p>
+        <p>Continent: {{locationDetails.continent}}</p>
+        <p>Continent Code: {{locationDetails.continent_code}}</p>
+        <p>Longitude: {{locationDetails.longitude}}</p>
+        <p>Latitude: {{locationDetails.latitude}}</p>
+        <p>VPN: {{locationDetails.security.is_vpn}}</p>
+        <p>Timezone Name: {{locationDetails.timezone.name}}</p>
+        <p>Timezone GMT Offset: {{locationDetails.timezone.gmt_offset}}</p>
+        <p>Timezone Current Time: {{locationDetails.timezone.current_time}}</p>
+        <p>Currency Name: {{locationDetails.currency.currency_name}}</p>
+        <p>Autonomous System Organization: {{locationDetails.connection.autonomous_system_organization}}</p>
+        <p>Connection Type: {{locationDetails.connection.connection_type}}</p>
+        <p>ISP Name: {{locationDetails.connection.isp_name}}</p>
+        <p>Organization Name: {{locationDetails.connection.organization_name}}</p>
+      </div>
+    </div>
+</div>
+
+<div mat-dialog-actions style="display: flex; justify-content: space-between;">
+  <button style="margin-left: 30px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
+
+</div>

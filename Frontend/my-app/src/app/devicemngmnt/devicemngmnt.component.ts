@@ -9,9 +9,7 @@ import { ChangeOwnerComponent } from './changeOwner/changeOwner.component';
 import { ShareDeviceComponent } from './shareDevice/shareDevice.component';
 import { UnshareDeviceComponent } from './unshareDevice/unshareDevice.component';
 import { FilterDevicesComponent } from './filterDevices/filterDevices.component';
-// import { AddUserComponent } from './add-user/addUser.component';
-// import { EditUserComponent } from './edit-user/editUser.component';
-// import { DeleteUserComponent } from './delete-user/deleteUser.component';
+import { GeoLocationComponent } from './geoLocation/geoLocation.component';
 @Component({
   selector: 'app-devicemngmnt',
   templateUrl: './devicemngmnt.component.html',
@@ -157,5 +155,13 @@ export class DeviceMngmntComponent implements OnInit{
           this.deviceTypeFilters = localStorage.getItem('deviceTypes')?.split(',')!
           this.getData()
         });
+      }
+
+      openLocationCheck(ip: any){
+        this.dialog.open(
+          GeoLocationComponent,
+          { width: '600px', height: '600px',
+          data: {ip: ip} }
+        );
       }
 }

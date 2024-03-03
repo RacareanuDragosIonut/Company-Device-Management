@@ -2,7 +2,7 @@ from Backend import app
 from Backend.routes.auth import login_required, session
 from database.models import User
 from database.models import Device
-from flask import request, jsonify, json, make_response
+from flask import Request, request, jsonify, json, make_response
 from mongoengine.queryset.visitor import Q
 import uuid
 @login_required
@@ -30,7 +30,6 @@ def get_devices():
 @app.route('/edit-device', methods=['POST'])
 def edit_device():
     device_data = request.get_json()
-    print(device_data)
     device_id = device_data.get('deviceId')
     user_id = session.get('user_id')
     user = User.objects(userId = user_id).first()
@@ -169,8 +168,6 @@ def unshare_from_users():
     data = request.get_json()
     shared_user_ids = data.get('user_ids')
     shared_device_id = data.get('device_id')
-    print(shared_user_ids)
-    print(shared_device_id)
     device = Device.objects(Q(deviceId=shared_device_id)).first()
     if device:
         for shared_user_id in shared_user_ids:

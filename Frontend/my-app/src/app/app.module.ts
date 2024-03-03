@@ -39,6 +39,8 @@ import { ShareDeviceComponent } from './devicemngmnt/shareDevice/shareDevice.com
 import { UnshareDeviceComponent } from './devicemngmnt/unshareDevice/unshareDevice.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FilterDevicesComponent } from './devicemngmnt/filterDevices/filterDevices.component';
+import { GeoLocationComponent } from './devicemngmnt/geoLocation/geoLocation.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,8 @@ import { FilterDevicesComponent } from './devicemngmnt/filterDevices/filterDevic
     ChangeOwnerComponent,
     ShareDeviceComponent,
     UnshareDeviceComponent,
-    FilterDevicesComponent
+    FilterDevicesComponent,
+    GeoLocationComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import { FilterDevicesComponent } from './devicemngmnt/filterDevices/filterDevic
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     RouterModule

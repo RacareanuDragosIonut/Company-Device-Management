@@ -51,7 +51,6 @@ def edit_user():
 @app.route('/change-password', methods=['POST'])
 def change_password():
     user_data = request.get_json()
-    print(user_data)
     user_id = session.get('user_id')
     original_password = user_data.get('originalPassword')
     new_password = user_data.get('newPassword')
