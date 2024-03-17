@@ -98,4 +98,9 @@ export class AuthServiceService {
   getUsernameById(id: any){
     return this.http.get(this.url + '/get-username/' + id);
   }
+
+
+  getAnalytics(){
+    return this.http.get(this.url + '/analytics');
+  }
 }

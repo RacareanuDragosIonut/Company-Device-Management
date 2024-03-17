@@ -16,4 +16,4 @@ CORS(app)
 from .routes.users import app
 from .routes.devices import app
 from .routes.auth import app
-from .routes.device_set import app
+from .routes.analytics import app

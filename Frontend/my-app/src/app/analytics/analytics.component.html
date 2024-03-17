@@ -1,0 +1,38 @@
+<div class="page-container">
+<h2>Devices Analytics</h2>
+<div class="home-button-container">
+<button mat-button routerLink="/home">
+  <mat-icon>home</mat-icon>
+  Home
+</button>
+</div>
+<div class="analytics-container">
+  <mat-checkbox (change)="switchCheck('deviceType')">Device Types Analytics</mat-checkbox>
+  <mat-checkbox *ngIf="role === 'masteradmin' || role === 'locationadmin'" (change)="switchCheck('group')">Group Analytics</mat-checkbox>
+  <mat-checkbox *ngIf="role === 'masteradmin'" (change)="switchCheck('location')">Location Analytics</mat-checkbox>
+</div>
+<div class="analytics-sections-container">
+<div *ngIf="showDeviceTypesAnalytics" class="analytics-section">
+  <h3>Device Types Analytics</h3>
+  <div *ngFor="let deviceType of deviceTypes" class="analytics-item">
+    {{ deviceType }}: {{ getPercentage(deviceType, 'deviceType') }}
+  </div>
+</div>
+
+<div *ngIf="showGroupAnalytics" class="analytics-section">
+  <h3>Group Devices Analytics</h3>
+  <div *ngFor="let group of groups" class="analytics-item">
+    {{ group }}: {{ getPercentage(group, 'group') }}
+  </div>
+</div>
+
+<div *ngIf="showLocationAnalytics" class="analytics-section">
+  <h3>Location Devices Analytics</h3>
+  <div *ngFor="let location of locations" class="analytics-item">
+    {{ location }}: {{ getPercentage(location, 'location') }}
+  </div>
+</div>
+</div>
+
+</div>
+

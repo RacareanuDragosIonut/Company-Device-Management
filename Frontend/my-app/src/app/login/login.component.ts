@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('location', user.location);
           localStorage.setItem('group', user.group);
           localStorage.setItem('role', user.role);
+          localStorage.setItem('deviceTypes', "Mobile Phone,Laptop,Headphones,Laboratory Engineer Device")
         } else if (response.message === 'Invalid password' || response.message === 'Invalid user') {
           this.snackBar.open('Invalid username or password', 'OK', { ...snackBarConfig, panelClass: ['error-snackbar'] });
         } else {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DevicesetComponent } from './deviceset.component';
+import { AnalyticsComponent } from './analytics.component';
 
-describe('DevicesetComponent', () => {
-  let component: DevicesetComponent;
-  let fixture: ComponentFixture<DevicesetComponent>;
+describe('AnalyticsComponent', () => {
+  let component: AnalyticsComponent;
+  let fixture: ComponentFixture<AnalyticsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DevicesetComponent]
+      imports: [AnalyticsComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(DevicesetComponent);
+
+    fixture = TestBed.createComponent(AnalyticsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

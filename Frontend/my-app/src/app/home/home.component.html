@@ -8,9 +8,9 @@
       <mat-icon>device_hub</mat-icon>
       Device Management
     </button>
-    <button mat-button routerLink="/deviceSets">
-      <mat-icon>devices_other</mat-icon>
-      Device Sets
+    <button *ngIf="role!='user'"mat-button routerLink="/analytics">
+      <mat-icon>analytics</mat-icon>
+      Analytics
     </button>
     <button mat-button routerLink="/user-info">
       <mat-icon>person</mat-icon>

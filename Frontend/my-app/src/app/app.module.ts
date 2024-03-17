@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { AuthServiceService } from './auth-service.service';
-import { DevicesetComponent } from './deviceset/deviceset.component';
+import { AnalyticsComponent} from './analytics/analytics.component';
 import { DeviceMngmntComponent } from './devicemngmnt/devicemngmnt.component';
 import { UsermngmntComponent } from './usermngmnt/usermngmnt.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
@@ -45,7 +45,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     AppComponent,
     LoginComponent,
-    DevicesetComponent,
+    AnalyticsComponent,
     UsermngmntComponent,
     UserinfoComponent,
     SignupComponent,

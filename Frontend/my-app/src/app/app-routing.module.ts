@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DeviceMngmntComponent } from './devicemngmnt/devicemngmnt.component';
-import { DevicesetComponent } from './deviceset/deviceset.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 import { UsermngmntComponent } from './usermngmnt/usermngmnt.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 import { NgModule } from '@angular/core';
@@ -38,8 +38,8 @@ export const routes: Routes = [
 
 },
 {
-  path: 'deviceSets',
-  component: DevicesetComponent,
+  path: 'analytics',
+  component: AnalyticsComponent,
   canActivate: [AuthGuardService]
 
 },
