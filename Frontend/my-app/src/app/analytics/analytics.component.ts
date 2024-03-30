@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
   styleUrl: './analytics.component.scss'
 })
 export class AnalyticsComponent implements OnInit{
+  @ViewChild('deviceChart') deviceChartRef!: ElementRef;
+  @ViewChild('groupChart') groupChartRef!: ElementRef;
+  @ViewChild('locationChart') locationChartRef!: ElementRef;
+  [key: string]: any;
   groups: string[] = [];
   locations: string[] = [];
   deviceTypes: string[] = [];
@@ -42,40 +47,51 @@ export class AnalyticsComponent implements OnInit{
         this.groupCounts = this.analytics.group;
       }
       this.totalCount = res.total_count_devices;
+      this.drawCharts();
     })
   }
 
-
-  getPercentage(name: string, typeOfCount: string): string{
-    let retMessage = ""
-    if(typeOfCount == "location"){
-      let number = this.locationCounts[name]
-      let percentage = (number / this.totalCount * 100).toFixed(2);
-      retMessage += number.toString() + ' / ' + this.totalCount + ' (' + percentage + ' %)'
-    }
-    if(typeOfCount == "group"){
-      let number = this.groupCounts[name]
-      let percentage = (number / this.totalCount * 100).toFixed(2);
-      retMessage += number.toString() + ' / ' + this.totalCount + ' (' + percentage + ' %)'
-    }
-    if(typeOfCount == "deviceType"){
-      let number = this.deviceTypesCounts[name]
-      let percentage = (number / this.totalCount * 100).toFixed(2);
-      retMessage += number.toString() + ' / ' + this.totalCount + ' (' + percentage + ' %)'
-    }
-    return retMessage
+  drawCharts(): void {
+    this.drawChart('deviceChart', this.deviceTypes, 'Device Types Analytics', this.deviceTypesCounts);
+    this.drawChart('groupChart', this.groups, 'Group Devices Analytics', this.groupCounts);
+    this.drawChart('locationChart', this.locations, 'Location Devices Analytics', this.locationCounts);
   }
 
+  drawChart(chartId: string, labels: string[], title: string, data: any): void {
+    const elementRef = this[chartId + 'Ref'];
+    if (!elementRef || !elementRef.nativeElement) return;
 
-  switchCheck(checkboxType: string){
-    if(checkboxType == "location"){
-      this.showLocationAnalytics = !this.showLocationAnalytics;
-    }
-    if(checkboxType == "group"){
-      this.showGroupAnalytics = !this.showGroupAnalytics;
-    }
-    if(checkboxType == "deviceType"){
-      this.showDeviceTypesAnalytics = !this.showDeviceTypesAnalytics;
-    }
+    const ctx = elementRef.nativeElement.getContext('2d');
+    if (!ctx) return;
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: title,
+          data: labels.map(label => data[label] || 0),
+          backgroundColor: this.getRandomColorArray(labels.length),
+          borderColor: 'rgba(0, 0, 0, 0.1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
+
+  getRandomColorArray(length: number): string[] {
+    const colors = [];
+    for (let i = 0; i < length; i++) {
+      colors.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+    }
+    return colors;
+  }
+
 }
