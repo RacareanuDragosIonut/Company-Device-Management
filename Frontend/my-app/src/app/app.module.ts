@@ -41,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FilterDevicesComponent } from './devicemngmnt/filterDevices/filterDevices.component';
 import { GeoLocationComponent } from './devicemngmnt/geoLocation/geoLocation.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     GeoLocationComponent
   ],
   imports: [
+    MatAutocompleteModule,
     BrowserModule,
     RouterModule,
     MatInputModule,

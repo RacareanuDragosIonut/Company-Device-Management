@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthServiceService } from '../../auth-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 @Component({
   selector: 'app-share-device',
   templateUrl: './shareDevice.component.html',
@@ -13,6 +12,10 @@ export class ShareDeviceComponent implements OnInit {
   shareDeviceForm!: FormGroup;
   owner: string = "";
   device: any;
+  availableUsers: any[] = [];
+  filteredUsernames: string[] = [];
+  availableUsernames: string[] = [];
+  loggedInUsername: string = "";
   constructor(
     public dialogRef: MatDialogRef<ShareDeviceComponent>,
     public authService: AuthServiceService, public snackBar: MatSnackBar,
@@ -22,6 +25,17 @@ export class ShareDeviceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedInUsername = localStorage.getItem('username')!;
+    this.authService.getUsers().subscribe((response: any) => {
+      this.availableUsers = response.users;
+      this.availableUsers = this.availableUsers.filter(user => {
+        return user.username != this.loggedInUsername && !this.device.sharedUsersId.includes(user.userId)
+      })
+      for(const user of this.availableUsers){
+        this.filteredUsernames.push(user.username)
+      }
+      this.availableUsernames = this.filteredUsernames
+    })
     this.initForm();
   }
 
@@ -30,6 +44,13 @@ export class ShareDeviceComponent implements OnInit {
       user: new FormControl('', [Validators.required])
     })
   }
+
+  onSearch(){
+    this.filteredUsernames = this.availableUsernames.filter(username => {
+      return username.toLowerCase().includes(this.shareDeviceForm.value.user.toLowerCase())
+    })
+  }
+
   onShareClick(): void {
 
     this.authService.shareDevice({'username': this.shareDeviceForm.value.user, 'device_id': this.device.deviceId}).subscribe((response: any) =>{

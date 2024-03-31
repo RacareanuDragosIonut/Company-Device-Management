@@ -1,24 +1,24 @@
-
-
 <div mat-dialog-title>
   <h2>Share with User</h2>
 </div>
 
 <div mat-dialog-content>
   <form [formGroup]="shareDeviceForm">
-    <span>Write the user's username</span>
+    <span>Select the user's username</span>
     <mat-form-field>
-      <input matInput placeholder="Username" formControlName="user" required>
-      <mat-error>Provide an user that you want to share the device with</mat-error>
+      <input (input)="onSearch()" matInput placeholder="Username" formControlName="user" [matAutocomplete]="auto">
+      <mat-error *ngIf="!filteredUsernames.includes(shareDeviceForm.value.user) && filteredUsernames.length > 0">Select a user that you want to share the device with.</mat-error>
+      <mat-error *ngIf="filteredUsernames.length == 0">There are no filtered users that you can share the device with.</mat-error>
     </mat-form-field>
-
-
-
-
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let username of filteredUsernames" [value]="username">
+        {{ username }}
+      </mat-option>
+    </mat-autocomplete>
   </form>
 </div>
 
 <div mat-dialog-actions style="display: flex; justify-content: space-between;">
   <button style="margin-left: 30px;" mat-raised-button (click)="onCancelClick()">Cancel</button>
-  <button style="margin-right: 30px;" mat-raised-button color="primary" (click)="onShareClick()" [disabled]="!shareDeviceForm.valid">Share</button>
+  <button style="margin-right: 30px;" mat-raised-button color="primary" (click)="onShareClick()" [disabled]="!filteredUsernames.includes(shareDeviceForm.value.user)">Share</button>
 </div>

@@ -129,30 +129,14 @@ def add_device():
 @login_required
 @app.route('/share-to-user', methods=['POST'])
 def share_to_user():
-    user_id = session.get('user_id')
-    user = User.objects(userId = user_id).first()
-    user_role = user.role
-    user_location = user.location
-    user_group = user.group
     data = request.get_json()
     shared_user_username = data.get('username')
     shared_device_id = data.get('device_id')
     
     shared_user = User.objects(Q(username=shared_user_username)).first()
-    if user is None:
-        return {'message': 'This username is not valid, please write a correct username'}
-    if user_role == "locationadmin":
-            if shared_user.location != user_location:
-                return {'message': "You can only share the device to a user from your own location."}
-    if user_role == "admin":
-            if shared_user.location != user_location or shared_user.group != user_group:
-                return {'message': "You can only share the device to a user from your own location and group."}
     shared_user_id = shared_user.userId
     device = Device.objects(Q(deviceId=shared_device_id)).first()
     if device:
-        already_shared_users = device.sharedUsersId
-        if shared_user_id in already_shared_users:
-            return jsonify({'message': 'Device already shared with the user'})
         result = device.update(push__sharedUsersId=shared_user_id)
         if result:
             return jsonify({'message': 'Device shared successfully'})
