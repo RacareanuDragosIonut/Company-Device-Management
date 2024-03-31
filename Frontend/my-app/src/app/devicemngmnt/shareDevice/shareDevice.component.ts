@@ -29,7 +29,7 @@ export class ShareDeviceComponent implements OnInit {
     this.authService.getUsers().subscribe((response: any) => {
       this.availableUsers = response.users;
       this.availableUsers = this.availableUsers.filter(user => {
-        return user.username != this.loggedInUsername && !this.device.sharedUsersId.includes(user.userId)
+        return user.username != this.loggedInUsername && !this.device.sharedUsersId.includes(user.userId) && this.device.owner != user.username
       })
       for(const user of this.availableUsers){
         this.filteredUsernames.push(user.username)

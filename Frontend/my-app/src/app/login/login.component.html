@@ -3,12 +3,12 @@
   <h1>Welcome to Company Devices Management!</h1>
   <h2>Login</h2>
 
-  <form  [formGroup]="loginForm">
+  <form  [formGroup]="loginForm" class="login-form">
     <div class="form-group">
       <mat-form-field>
-      <mat-label>Username</mat-label>
+      <mat-label>Username (email)</mat-label>
       <input matInput placeholder="Username" formControlName="username" required>
-      <mat-error>Provide a username</mat-error>
+      <mat-error>Provide a username which is a valid email</mat-error>
       <br>
       </mat-form-field>
     </div>

@@ -43,13 +43,15 @@ export class AddDeviceComponent implements OnInit {
     })
     if(this.groups.length == 1){
       this.addDeviceForm.get('group')?.disable();
+      this.addDeviceForm.get('group')?.setValue(this.groups[0]);
     }
     if(this.locations.length == 1){
       this.addDeviceForm.get('location')?.disable();
+      this.addDeviceForm.get('location')?.setValue(this.locations[0]);
     }
   }
   onAddClick(): void {
-    this.authService.addDevice({...this.addDeviceForm.value, owner: this.owner}).subscribe((response: any) =>{
+    this.authService.addDevice({...this.addDeviceForm.getRawValue(), owner: this.owner}).subscribe((response: any) =>{
       if (response && response.message) {
         const snackBarConfig = {
           duration: 3000,

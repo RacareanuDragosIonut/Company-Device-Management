@@ -51,7 +51,7 @@ export class EditDeviceComponent implements OnInit {
   }
   onUpdateClick(): void {
     this.authService.editDevice({deviceId: this.device.deviceId, sharedUsersId: this.device.sharedUsersId,
-      owner: this.device.owner, ...this.editDeviceForm.value}).subscribe((response: any)=>{
+      owner: this.device.owner, ...this.editDeviceForm.getRawValue()}).subscribe((response: any)=>{
       if (response && response.message) {
         const snackBarConfig = {
           duration: 3000,

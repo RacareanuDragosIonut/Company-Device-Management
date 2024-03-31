@@ -2,9 +2,10 @@ from Backend import app
 from Backend.routes.auth import login_required, session
 from database.models import User
 from database.models import Device
-from flask import Request, request, jsonify, json, make_response
+from flask import request, jsonify
 from mongoengine.queryset.visitor import Q
 import uuid
+
 @login_required
 @app.route('/devices', methods=['GET'])
 def get_devices():
