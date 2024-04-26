@@ -22,11 +22,18 @@ export class EditDeviceComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
       this.device = data.device;
+      console.log(this.device.location)
   }
 
   ngOnInit(): void {
     this.groups = this.authService.acceptedGroups;
+    if(!this.groups.includes(this.device.group)){
+      this.groups.push(this.device.group)
+    }
     this.locations = this.authService.acceptedLocations;
+    if(!this.locations.includes(this.device.location)){
+      this.locations.push(this.device.location);
+    }
     this.roles = this.authService.acceptedRoles;
     this.deviceTypes = this.authService.deviceTypes;
     this.initForm();
