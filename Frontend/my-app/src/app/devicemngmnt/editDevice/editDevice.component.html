@@ -46,7 +46,8 @@
 
     <mat-form-field>
       <input matInput placeholder="IP" formControlName="ip" required>
-      <mat-error>Provide an IP</mat-error>
+      <mat-error *ngIf="editDeviceForm.get('ip')?.hasError('required')">Provide an IP</mat-error>
+      <mat-error *ngIf="editDeviceForm.get('ip')?.hasError('invalidIp')">Invalid IP address format</mat-error>
     </mat-form-field>
   </form>
 </div>

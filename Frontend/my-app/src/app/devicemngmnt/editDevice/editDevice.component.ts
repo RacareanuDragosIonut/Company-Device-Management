@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthServiceService } from '../../auth-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -45,7 +45,7 @@ export class EditDeviceComponent implements OnInit {
       group: new FormControl(this.device.group, [Validators.required]),
       type: new FormControl(this.device.type, [Validators.required]),
       model: new FormControl(this.device.model, [Validators.required]),
-      ip: new FormControl(this.device.ip, [Validators.required])
+      ip: new FormControl(this.device.ip, [Validators.required, this.ipv4Validator()])
     })
 
     if(this.groups.length == 1){
@@ -55,6 +55,34 @@ export class EditDeviceComponent implements OnInit {
       this.editDeviceForm.get('location')?.disable();
     }
   }
+
+  ipv4Validator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const ipAddress = control.value;
+
+      if (!ipAddress) {
+        return null;
+      }
+
+      const ipPattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+
+      if (!ipPattern.test(ipAddress)) {
+        return { invalidIp: true };
+      }
+
+      const parts = ipAddress.split('.');
+
+      if (
+        parts.some((part: string) => parseInt(part, 10) > 255 || isNaN(parseInt(part, 10))) ||
+        parts.length !== 4
+      ) {
+        return { invalidIp: true };
+      }
+
+      return null;
+    };
+    }
+
   onUpdateClick(): void {
     this.authService.editDevice({deviceId: this.device.deviceId, sharedUsersId: this.device.sharedUsersId,
       owner: this.device.owner, ...this.editDeviceForm.getRawValue()}).subscribe((response: any)=>{

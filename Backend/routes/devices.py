@@ -54,6 +54,10 @@ def edit_device():
             if user_role == "admin":
                 if owner_user.location != user_location or owner_user.group != user_group:
                     error_message += "You can only change the owner to a user from your own location and group."
+    if Device.objects(Q(name=device_data['name'])& Q(location=device_data['location'])& Q(group=device_data['group'])).first() and (device_data['name'] != original_device.name or device_data['location'] != original_device.location or device_data['group'] != original_device.group):
+        error_message += 'Device Name already exists in location ' + device_data['location'] + ' and in group ' + device_data['group'] + '.Please choose a different device name.\n'
+    if Device.objects(Q(ip=device_data['ip'])).first() and device_data['ip'] != original_device.ip: 
+        error_message += 'IP already exists. Please choose a different IP.\n'
     if(error_message == ""):
         update_fields = {
             'owner': device_data.get('owner'),
