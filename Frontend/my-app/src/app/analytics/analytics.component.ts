@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-analytics',
@@ -52,12 +51,12 @@ export class AnalyticsComponent implements OnInit{
   }
 
   drawCharts(): void {
-    this.drawChart('deviceChart', this.deviceTypes, 'Device Types Analytics', this.deviceTypesCounts);
-    this.drawChart('groupChart', this.groups, 'Group Devices Analytics', this.groupCounts);
-    this.drawChart('locationChart', this.locations, 'Location Devices Analytics', this.locationCounts);
+    this.drawChart('deviceChart', this.deviceTypes, this.deviceTypesCounts);
+    this.drawChart('groupChart', this.groups, this.groupCounts);
+    this.drawChart('locationChart', this.locations, this.locationCounts);
   }
 
-  drawChart(chartId: string, labels: string[], title: string, data: any): void {
+  drawChart(chartId: string, labels: string[], data: any): void {
     const elementRef = this[chartId + 'Ref'];
     if (!elementRef || !elementRef.nativeElement) return;
 
@@ -79,6 +78,11 @@ export class AnalyticsComponent implements OnInit{
         scales: {
           y: {
             beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
           }
         }
       }
