@@ -2,10 +2,10 @@
 <div>
   <mat-toolbar>
     <h2>Device Management</h2>
-
+    <div class="search-container">
     <input matInput placeholder="Search Device Name" (input)="applySearch($event)">
     <mat-icon>search</mat-icon>
-    <span class="spacer"></span>
+    </div>
     <button class="standard-button" mat-button (click)="goToHomePage()">
       <mat-icon>home</mat-icon>Home
     </button>
