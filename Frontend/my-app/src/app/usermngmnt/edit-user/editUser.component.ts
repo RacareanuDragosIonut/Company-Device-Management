@@ -46,7 +46,7 @@ export class EditUserComponent implements OnInit {
     }
   }
   onUpdateClick(): void {
-    this.authService.editUser({userId: this.user.userId, ...this.editUserForm.value}).subscribe((response: any)=>{
+    this.authService.editUser({userId: this.user.userId, ...this.editUserForm.getRawValue()}).subscribe((response: any)=>{
       if (response && response.message) {
         const snackBarConfig = {
           duration: 3000,
