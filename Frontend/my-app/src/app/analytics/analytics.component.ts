@@ -69,7 +69,6 @@ export class AnalyticsComponent implements OnInit{
       data: {
         labels: labels,
         datasets: [{
-          label: title,
           data: labels.map(label => data[label] || 0),
           backgroundColor: this.getRandomColorArray(labels.length),
           borderColor: 'rgba(0, 0, 0, 0.1)',

@@ -22,7 +22,6 @@ export class EditDeviceComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
       this.device = data.device;
-      console.log(this.device.location)
   }
 
   ngOnInit(): void {
