@@ -40,9 +40,11 @@ export class EditUserComponent implements OnInit {
 
     if(this.groups.length == 1){
       this.editUserForm.get('group')?.disable();
+      this.editUserForm.get('group')?.setValue(this.groups[0]);
     }
     if(this.locations.length == 1){
       this.editUserForm.get('location')?.disable();
+      this.editUserForm.get('location')?.setValue(this.locations[0]);
     }
   }
   onUpdateClick(): void {

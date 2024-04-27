@@ -38,9 +38,11 @@ export class AddUserComponent implements OnInit {
     })
     if(this.groups.length == 1){
       this.addUserForm.get('group')?.disable();
+      this.addUserForm.get('group')?.setValue(this.groups[0]);
     }
     if(this.locations.length == 1){
       this.addUserForm.get('location')?.disable();
+      this.addUserForm.get('location')?.setValue(this.locations[0]);
     }
   }
   onAddClick(): void {
