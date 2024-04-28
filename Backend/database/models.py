@@ -13,6 +13,8 @@ class Device(db.Document):
     type = db.StringField(Required=True)
     model = db.StringField(Required=True)
     ip = db.StringField(Required=True)
+    productionDate = db.StringField(Required=True)
+    returnDate = db.StringField(Required=True)
     sharedUsersId = db.ListField()
 
 class User(db.Document):

@@ -39,7 +39,9 @@ export class AddDeviceComponent implements OnInit {
       group: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
       model: new FormControl('', [Validators.required]),
-      ip: new FormControl('', [Validators.required, this.ipv4Validator()])
+      ip: new FormControl('', [Validators.required, this.ipv4Validator()]),
+      productionDate: new FormControl('', [Validators.required]),
+      returnDate: new FormControl('', [Validators.required])
     })
     if(this.groups.length == 1){
       this.addDeviceForm.get('group')?.disable();

@@ -51,6 +51,38 @@
       <td mat-cell *matCellDef="let device">{{ device.ip }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="productionDate">
+      <th mat-header-cell *matHeaderCellDef>Production Date
+        <mat-checkbox
+          [checked]="sortByProductionDateAscending"
+          (change)="toggleProductionDateCheckbox()"
+        ></mat-checkbox>
+        <button *ngIf="sortByProductionDateAscending" mat-icon-button (click)="toggleSortByProductionDate()">
+          <mat-icon *ngIf="sortByProductionDateAscendingArrow">arrow_upward</mat-icon>
+          <mat-icon *ngIf="!sortByProductionDateAscendingArrow">arrow_downward</mat-icon>
+        </button>
+      </th>
+
+      <td mat-cell *matCellDef="let device">{{ mapDate(device.productionDate) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="returnDate">
+      <th mat-header-cell *matHeaderCellDef>Return Date
+
+        <mat-checkbox
+          [checked]="sortByReturnDateAscending"
+          (change)="toggleReturnDateCheckbox()"
+        >
+      </mat-checkbox>
+        <button *ngIf="sortByReturnDateAscending" mat-icon-button (click)="toggleSortByReturnDate()">
+          <mat-icon *ngIf="sortByReturnDateAscendingArrow">arrow_upward</mat-icon>
+          <mat-icon *ngIf="!sortByReturnDateAscendingArrow">arrow_downward</mat-icon>
+        </button>
+      </th>
+
+      <td mat-cell *matCellDef="let device">{{ mapDate(device.returnDate) }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="locationCheck">
       <th mat-header-cell *matHeaderCellDef>Location Check</th>
       <td mat-cell *matCellDef="let device">
@@ -76,8 +108,8 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'owner', 'type', 'model', 'ip', 'locationCheck', 'actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'owner', 'type', 'model', 'ip','locationCheck','actions']"></tr>
+    <tr mat-header-row *matHeaderRowDef="['name', 'location', 'group', 'owner', 'type', 'model', 'ip', 'productionDate', 'returnDate', 'locationCheck', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'group', 'owner', 'type', 'model', 'ip', 'productionDate', 'returnDate', 'locationCheck','actions']"></tr>
   </table>
   <mat-paginator [length]="searchDevices.length" [pageSize]="pageSize"
   [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons

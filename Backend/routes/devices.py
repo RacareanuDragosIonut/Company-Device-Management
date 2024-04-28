@@ -67,7 +67,9 @@ def edit_device():
             'type': device_data.get('type'),
             'model': device_data.get('model'),
             'ip': device_data.get('ip'),
-            'sharedUsersId': device_data.get('sharedUsersId')
+            'sharedUsersId': device_data.get('sharedUsersId'),
+            'productionDate': device_data.get('productionDate'),
+            'returnDate': device_data.get('returnDate')
         }
 
         result = Device.objects(deviceId=device_id).update(**update_fields)
@@ -107,6 +109,8 @@ def add_device():
     model = data['model']
     ip = data['ip']
     type = data['type']
+    production_date = data['productionDate']
+    return_date = data['returnDate']
 
     shared_users_id = []
     error_message=""
@@ -126,6 +130,8 @@ def add_device():
         type=type,
         model=model,
         ip=ip,
+        productionDate = production_date,
+        returnDate = return_date,
         sharedUsersId=shared_users_id
     )
     new_device.save()

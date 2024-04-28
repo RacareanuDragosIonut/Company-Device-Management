@@ -45,7 +45,9 @@ export class EditDeviceComponent implements OnInit {
       group: new FormControl(this.device.group, [Validators.required]),
       type: new FormControl(this.device.type, [Validators.required]),
       model: new FormControl(this.device.model, [Validators.required]),
-      ip: new FormControl(this.device.ip, [Validators.required, this.ipv4Validator()])
+      ip: new FormControl(this.device.ip, [Validators.required, this.ipv4Validator()]),
+      productionDate: new FormControl(this.device.productionDate, [Validators.required]),
+      returnDate: new FormControl(this.device.returnDate, [Validators.required]),
     })
 
     if(this.groups.length == 1){

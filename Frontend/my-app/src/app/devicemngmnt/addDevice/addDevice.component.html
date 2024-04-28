@@ -48,6 +48,20 @@
       <mat-error *ngIf="addDeviceForm.get('ip')?.hasError('required')">Provide an IP</mat-error>
       <mat-error *ngIf="addDeviceForm.get('ip')?.hasError('invalidIp')">Invalid IP address format, provide an IP with the IPv4 format</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="productionPicker" placeholder="Production Date" formControlName="productionDate" required>
+      <mat-datepicker-toggle matSuffix [for]="productionPicker"></mat-datepicker-toggle>
+      <mat-datepicker #productionPicker></mat-datepicker>
+      <mat-error>Select a production date</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="returnPicker" placeholder="Return Date" formControlName="returnDate" required>
+      <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+      <mat-datepicker #returnPicker></mat-datepicker>
+      <mat-error>Select a return date</mat-error>
+    </mat-form-field>
   </form>
 </div>
 

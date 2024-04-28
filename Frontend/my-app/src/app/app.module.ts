@@ -1,6 +1,8 @@
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { AuthServiceService } from './auth-service.service';
@@ -67,6 +69,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     GeoLocationComponent
   ],
   imports: [
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatAutocompleteModule,
     BrowserModule,
     RouterModule,

@@ -25,6 +25,10 @@ export class DeviceMngmntComponent implements OnInit{
       userLocation: string ="";
       userGroup: string = "";
       deviceTypeFilters: string[] = []
+      sortByProductionDateAscending: boolean = false;
+      sortByReturnDateAscending: boolean = false;
+      sortByProductionDateAscendingArrow: boolean = true;
+      sortByReturnDateAscendingArrow: boolean = true;
       constructor(public authService: AuthServiceService, public router: Router, public dialog: MatDialog){
 
       }
@@ -48,7 +52,7 @@ export class DeviceMngmntComponent implements OnInit{
 
       applySearch(event: any): void {
         let searchTerm: string = (event.target as HTMLInputElement).value;
-        this.searchDevices = this.devices.filter( device => device.name.toLowerCase().includes(searchTerm));
+        this.searchDevices = this.devices.filter( device => device.name.toLowerCase().includes(searchTerm.toLowerCase()));
         this.paginatedDevices = this.getPaginatedDevices(this.searchDevices);
       }
       addDevice(){
@@ -104,7 +108,55 @@ export class DeviceMngmntComponent implements OnInit{
 
       }
 
+      mapDate(inputDate: string): string {
 
+        const dateObject = new Date(inputDate);
+
+
+        dateObject.setDate(dateObject.getDate());
+
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObject.getDate()).padStart(2, '0');
+
+        const nextDayDate = `${year}-${month}-${day}`;
+
+        return nextDayDate;
+      }
+
+      toggleSortByProductionDate(): void {
+        this.sortByProductionDateAscendingArrow = !this.sortByProductionDateAscendingArrow;
+        this.searchDevices.sort((a, b) => {
+          const dateA = new Date(a.productionDate).getTime();
+          const dateB = new Date(b.productionDate).getTime();
+          return this.sortByProductionDateAscendingArrow ? dateA - dateB : dateB - dateA;
+        });
+        this.paginatedDevices = this.getPaginatedDevices(this.searchDevices);
+      }
+
+      toggleSortByReturnDate(): void {
+        this.sortByReturnDateAscendingArrow = !this.sortByReturnDateAscendingArrow;
+        this.searchDevices.sort((a, b) => {
+          const dateA = new Date(a.returnDate).getTime();
+          const dateB = new Date(b.returnDate).getTime();
+          return this.sortByReturnDateAscendingArrow ? dateA - dateB : dateB - dateA;
+        });
+        this.paginatedDevices = this.getPaginatedDevices(this.searchDevices);
+      }
+
+      toggleProductionDateCheckbox(){
+        this.sortByProductionDateAscending = !this.sortByProductionDateAscending;
+        if(this.sortByProductionDateAscending){
+          this.sortByReturnDateAscending = false;
+        }
+      }
+
+      toggleReturnDateCheckbox(){
+        this.sortByReturnDateAscending = !this.sortByReturnDateAscending;
+        if(this.sortByReturnDateAscending){
+          this.sortByProductionDateAscending = false;
+        }
+      }
 
       share(device: any){
         const dialogRef = this.dialog.open(
