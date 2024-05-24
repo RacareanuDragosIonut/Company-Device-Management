@@ -11,11 +11,11 @@
       <h3>Device Types Analytics</h3>
       <canvas #deviceChart></canvas>
     </div>
-    <div class="analytics-chart" *ngIf="role === 'masteradmin' || role === 'locationadmin'">
+    <div class="analytics-chart" *ngIf="role === 'companyadmin' || role === 'locationadmin'">
       <h3>Group Devices Analytics</h3>
       <canvas #groupChart></canvas>
     </div>
-    <div class="analytics-chart" *ngIf="role === 'masteradmin'">
+    <div class="analytics-chart" *ngIf="role === 'companyadmin'">
       <h3>Location Devices Analytics</h3>
       <canvas #locationChart></canvas>
     </div>

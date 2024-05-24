@@ -17,7 +17,7 @@ def get_devices():
         user_group = user.group
         user_id = user.userId
         user_username = user.username
-        if user_role == "masteradmin":
+        if user_role == "companyadmin":
             devices_returned = Device.objects()
         if user_role == "locationadmin":
             devices_returned = Device.objects.filter(Q(location=user_location) | Q(sharedUsersId__contains=user_id))

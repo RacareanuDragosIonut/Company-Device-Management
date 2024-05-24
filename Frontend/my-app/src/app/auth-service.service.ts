@@ -13,7 +13,7 @@ export class AuthServiceService {
   userLocation: string = "";
   userGroup: string = "";
   userUsername: string = "";
-  roles: string[] = ["masteradmin", "locationadmin", "admin", "user"]
+  roles: string[] = ["companyadmin", "locationadmin", "admin", "user"]
   locations: string[]= ["Bucharest", "Paris", "Berlin", "London", "Rome", "Budapest"]
   groups: string[] = ["Development","Network", "Human Resources", "Sales", "Management"]
   deviceTypes: string[] = ["Mobile Phone", "Laptop", "Headphones", "Laboratory Engineer Device"]
@@ -29,7 +29,7 @@ export class AuthServiceService {
     this.userLocation = localStorage.getItem('location')!;
     this.userGroup = localStorage.getItem('group')!;
     this.userUsername = localStorage.getItem('username')!;
-    if(this.userRole == "masteradmin"){
+    if(this.userRole == "companyadmin"){
       this.acceptedRoles = this.roles;
       this.acceptedLocations = this.locations;
       this.acceptedGroups = this.groups;

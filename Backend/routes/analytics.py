@@ -15,7 +15,7 @@ def get_analytics():
     groups = ["Development","Network", "Human Resources", "Sales", "Management"]
     device_types = ["Mobile Phone", "Laptop", "Headphones", "Laboratory Engineer Device"]
     response = {}
-    if user['role'] == "masteradmin":
+    if user['role'] == "companyadmin":
         total_count_devices = Device.objects().count()
         response['deviceTypes'] = {}
         for device_type in device_types:

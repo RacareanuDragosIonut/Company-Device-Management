@@ -13,7 +13,7 @@ def get_users():
         user_location = user.location
         user_group = user.group
         user_username = user.username
-        if user_role == "masteradmin":
+        if user_role == "companyadmin":
             users_returned = User.objects(Q(username__ne=user_username))
         if user_role == "locationadmin":
             accepted_roles = ['locationadmin', 'admin', 'user']
