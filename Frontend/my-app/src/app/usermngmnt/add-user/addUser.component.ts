@@ -46,7 +46,7 @@ export class AddUserComponent implements OnInit {
     }
   }
   onAddClick(): void {
-    this.authService.signup(this.addUserForm.value).subscribe((response: any) =>{
+    this.authService.signup(this.addUserForm.getRawValue()).subscribe((response: any) =>{
       if (response && response.message) {
         const snackBarConfig = {
           duration: 3000,
