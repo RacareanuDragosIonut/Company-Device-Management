@@ -115,7 +115,7 @@ def add_device():
     shared_users_id = []
     error_message=""
     if Device.objects(Q(name=name)& Q(location=location)& Q(group=group)).first():
-        error_message += 'Device Name already exists in location ' + location + 'and in group' + group + '.Please choose a different device name.\n'
+        error_message += 'Device Name already exists in location ' + location + 'and in group ' + group + '.Please choose a different device name.\n'
     if Device.objects(Q(ip=ip)).first(): 
         error_message += 'IP already exists. Please choose a different IP.\n'
     if error_message != "":
