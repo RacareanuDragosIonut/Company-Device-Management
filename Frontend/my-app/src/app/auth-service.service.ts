@@ -44,6 +44,12 @@ export class AuthServiceService {
       this.acceptedLocations = [this.userLocation];
       this.acceptedGroups = [this.userGroup];
   }
+    if(this.userRole == "user"){
+      this.acceptedRoles = ["user"];
+      this.acceptedLocations = [this.userLocation];
+      this.acceptedGroups = [this.userGroup];
+    }
+
   }
 
   login(data: any): Observable<any>{
