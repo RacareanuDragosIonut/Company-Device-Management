@@ -30,15 +30,15 @@ def get_analytics():
         total_count_devices = Device.objects.filter(Q(location=user['location'])).count()
         response['deviceTypes'] = {}
         for device_type in device_types:
-            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type)).count()
+            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & Q(location=user['location'])).count()
         response['group'] = {}
         for group in groups:
-            response['group'][group] = Device.objects.filter(Q(group=group)).count()
+            response['group'][group] = Device.objects.filter(Q(group=group) & Q(location=user['location'])).count()
     if user['role'] == "admin":
         total_count_devices = Device.objects.filter(Q(location=user['location']) & Q(group=user['group'])).count()
         response['deviceTypes'] = {}
         for device_type in device_types:
-            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type)).count()
+            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & Q(location=user['location']) & Q(group=user['group'])).count()
     return {'response': response, 'total_count_devices': total_count_devices}
             
     
