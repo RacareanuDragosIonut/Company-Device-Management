@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
 import { AuthServiceService } from '../../auth-service.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { api_key } from './hidden-key';
 @Component({
 
   selector: 'app-geo-location',
@@ -15,7 +15,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class GeoLocationComponent implements OnInit {
 
 
-  api_key = 'af5c7a648e4b449d9e0684330a9ae1ef';
+  // api_key = 'af5c7a648e4b449d9e0684330a9ae1ef';
+  api_key = api_key;
   apiUrl: string = ""
   ip: string = ""
   locationDetails: any = {}
