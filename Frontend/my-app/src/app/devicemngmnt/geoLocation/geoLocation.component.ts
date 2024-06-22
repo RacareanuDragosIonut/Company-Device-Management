@@ -14,8 +14,6 @@ import { api_key } from './hidden-key';
 
 export class GeoLocationComponent implements OnInit {
 
-
-  // api_key = 'af5c7a648e4b449d9e0684330a9ae1ef';
   api_key = api_key;
   apiUrl: string = ""
   ip: string = ""
