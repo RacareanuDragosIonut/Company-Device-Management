@@ -27,18 +27,18 @@ def get_analytics():
         for group in groups:
             response['group'][group] = Device.objects.filter(Q(group=group)).count()
     if user['role'] == "locationadmin":
-        total_count_devices = Device.objects.filter(Q(location=user['location'])).count()
+        total_count_devices = Device.objects.filter(Q(location=user['location']) | Q(sharedUsersId__contains=user_id)).count()
         response['deviceTypes'] = {}
         for device_type in device_types:
-            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & Q(location=user['location'])).count()
+            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & (Q(location=user['location']) | Q(sharedUsersId__contains=user_id))).count()
         response['group'] = {}
         for group in groups:
-            response['group'][group] = Device.objects.filter(Q(group=group) & Q(location=user['location'])).count()
+            response['group'][group] = Device.objects.filter(Q(group=group) & (Q(location=user['location']) | Q(sharedUsersId__contains=user_id))).count()
     if user['role'] == "admin":
-        total_count_devices = Device.objects.filter(Q(location=user['location']) & Q(group=user['group'])).count()
+        total_count_devices = Device.objects.filter(Q(location=user['location']) & Q(group=user['group']) | Q(sharedUsersId__contains=user_id)).count()
         response['deviceTypes'] = {}
         for device_type in device_types:
-            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & Q(location=user['location']) & Q(group=user['group'])).count()
+            response['deviceTypes'][device_type] = Device.objects.filter(Q(type=device_type) & (Q(location=user['location']) & Q(group=user['group']) | Q(sharedUsersId__contains=user_id))).count()
     return {'response': response, 'total_count_devices': total_count_devices}
             
     
