@@ -3,6 +3,46 @@ from Backend.routes.auth import login_required, session
 from database.models import User
 from flask import request, jsonify, json, make_response
 from mongoengine.queryset.visitor import Q
+from cryptography.fernet import Fernet
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.backends import default_backend
+import base64
+key = b'Sixteen byte key'  
+iv = b'Sixteen byte IV.'   
+
+def encrypt_password(password: str) -> str:
+    
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    encryptor = cipher.encryptor()
+
+    
+    padder = padding.PKCS7(algorithms.AES.block_size).padder()
+    padded_password = padder.update(password.encode('utf-8')) + padder.finalize()
+
+    
+    encrypted_password = encryptor.update(padded_password) + encryptor.finalize()
+
+    
+    return base64.urlsafe_b64encode(encrypted_password).decode('utf-8')
+
+def decrypt_password(encrypted_password: str) -> str:
+    
+    encrypted_password_bytes = base64.urlsafe_b64decode(encrypted_password.encode('utf-8'))
+
+    
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+
+    
+    padded_password = decryptor.update(encrypted_password_bytes) + decryptor.finalize()
+
+    
+    unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
+    password = unpadder.update(padded_password) + unpadder.finalize()
+
+    return password.decode('utf-8')
+
 @login_required
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -55,15 +95,15 @@ def change_password():
     original_password = user_data.get('originalPassword')
     new_password = user_data.get('newPassword')
     confirm_new_password = user_data.get('confirmNewPassword')
-    user = User.objects(Q(userId=user_id) & Q(password=original_password))
+    user = User.objects(Q(userId=user_id) & Q(password=encrypt_password(original_password)))
     if not user:
         return jsonify({'message': 'The old password is not correct'})
     if new_password != confirm_new_password:
         return jsonify({'message': 'The passwords of the last 2 inputs should be identical'})
     if original_password == new_password:
         return jsonify({'message': 'The new password should be different that the old password'})
-    
-    result = User.objects(userId=user_id).update(**{'password': new_password})
+    encrypted_new_password = encrypt_password(new_password)
+    result = User.objects(userId=user_id).update(**{'password': encrypted_new_password})
 
     if result:
         return jsonify({'message': 'Password updated successfully'})
