@@ -1,4 +1,5 @@
 Installation steps:
+
 1.Install Node.js (https://nodejs.org/en/download/prebuilt-installer)
 2.Install Angular: npm install -g @angular/cli(in terminal)
 3.Install Python (https://www.python.org/downloads/)
@@ -8,6 +9,7 @@ Installation steps:
 7.Install Flask CORS: python -m pip install flask_cors
 
 Running steps:
+
 git clone https://gitlab.upt.ro/dragos.racareanu/company-devices-management-licenta.git
 
 1. Start Frontend: 
