@@ -18,10 +18,11 @@ Running steps:
 
 git clone https://gitlab.upt.ro/dragos.racareanu/company-devices-management-licenta.git
 
-1. Start Frontend: 
-	1.cd Frontend/my-app
+1. Start Frontend:
    
-	2.ng serve
+	1. cd Frontend/my-app
+   
+	2. ng serve
    
 3. Start Backend
 	1. cd Backend
